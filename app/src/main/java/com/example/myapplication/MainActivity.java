@@ -12,6 +12,7 @@ import com.example.myapplication.retrofit.ApiRest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -32,70 +33,18 @@ public class MainActivity extends AppCompatActivity {
 
         btn_ingresar.setOnClickListener(v -> {
 
-            // Prueba fail, por que al parecer el converter afecta a como se consumira el ws
-            /*Retrofit2 retrofit2 = new Retrofit2();
-
-            retrofit2.getService().wsNoticias(new Callback<String>() {
-                @Override
-                public void success(String s, Response response) {
-                    if (response.getStatus()==200){
-
-                        JSONArray data = null;
-                        try {
-                            data = new JSONArray(s);
-                            Log.i("Esta es la información", data.toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }else{
-                        Toast.makeText(getApplicationContext(), "Ocurrió un problema con el servidor", Toast.LENGTH_LONG).show();
-
-                    }
-                }
-
-                @Override
-                public void failure(RetrofitError error) {
-
-                }
-            });*/
-            //------------------------- RETROFIT 2 -----------------------------------
-            /*Retrofit2 retrofit2 = new Retrofit2();
-
-            Call<JsonObject> call = retrofit2.getService().getPokemonById("ditto");
-
-            call.enqueue(new Callback<JsonObject>() {
-                @Override
-                public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                    if(response.isSuccessful()){
-                        JsonObject pokemon = response.body();
-                        JsonArray habilidades = pokemon.getAsJsonArray("abilities");
-                        Log.i("pokemon", habilidades.toString());
-                    } else {
-                        Log.e("error", "Hubo un error inesperado!");
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<JsonObject> call, Throwable t) {
-
-                }
-            });*/
-
-
-
-            //------------------------- RETROFIT 1 --------------------------------------
             ApiRest apiRest =  new ApiRest();
 
-            apiRest.getService().wsNoticias(new Callback<String>() {
+            apiRest.getService().wsGetPokemon("ditto",new Callback<String>() {
                 @Override
                 public void success(String s, Response response) {
                     if (response.getStatus()==200){
 
                         try {
-                            JSONArray data = new JSONArray(s);
-                            data.optJSONObject(0).optString("detail");
-                            Log.i("detalle", data.optJSONObject(0).optString("detail"));
-                            Log.i("Esta es la información", data.toString());
+                            //Recuerden que la data puede venir dentro de un jsonArray o un jsonObject de primeras.
+                            //JSONArray data = new JSONArray(s);
+                            JSONObject data = new JSONObject(s);
+                            Log.i("detalle", data.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -109,15 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
-
-            //---------------------- Login xd -----------------------------
-            /*if (editPassword.getText().toString().equals("12") && editUser.getText().toString().equals("daniel")){
-                abrirPantallaAdmin();
-            }else if(editPassword.getText().toString().equals("123") && editUser.getText().toString().equals("josue")){
-                abrirPantallaUsuario();
-            }else{
-                Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_LONG).show();
-            }*/
 
         });
 

@@ -6,7 +6,7 @@ import retrofit.http.Path;
 
 public interface Urls {
 
-
+    //Urls para guatepreviene
     @GET("/api/information")
     void wsEmergencias(Callback<String> cb);
 
@@ -20,5 +20,7 @@ public interface Urls {
 
     @GET("/api/centres")
     void wsCentros(Callback<String> cb);
+
+
 
 }

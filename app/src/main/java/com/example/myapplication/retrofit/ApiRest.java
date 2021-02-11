@@ -14,23 +14,26 @@ import retrofit.mime.TypedInput;
 import retrofit.mime.TypedOutput;
 
 public class ApiRest {
-    final private Urls urls;
+    /*Aquí se coloca que interface se utilizará para las urls de los ws. (Alt+j): para seleccionar la misma palabra*/
+    final private UrlsPokemon urls;
     public ApiRest()
     {
+        //Recuerden cambiar la URL_BASE
+
         final OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.setReadTimeout(45, TimeUnit.SECONDS);
         okHttpClient.setConnectTimeout(45, TimeUnit.SECONDS);
         RestAdapter restAdapter= new RestAdapter.Builder()
                 .setLogLevel(RestAdapter.LogLevel.FULL)
-                .setEndpoint(Utils.URL_BASE2)
+                /*Aquí cambian la URL_BASE*/.setEndpoint(Utils.URL_BASE)
                 .setConverter(new StringConverter2())
                 .setClient(new OkClient(okHttpClient))
                 .build();
-        urls= restAdapter.create(Urls.class);
+        urls= restAdapter.create(UrlsPokemon.class);
     }
 
     static class StringConverter2 implements Converter {
-
+        //Parsear la respuesta a una cadena
         @Override
         public Object fromBody(TypedInput typedInput, Type type) {
             try {
@@ -47,7 +50,7 @@ public class ApiRest {
             return null;
         }
     }
-    public Urls getService() {
+    public UrlsPokemon getService() {
         return  urls;
     }
 }
