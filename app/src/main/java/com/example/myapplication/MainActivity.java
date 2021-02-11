@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myapplication.models.PokemonByIdResponse;
 import com.example.myapplication.retrofit.ApiRest;
 import com.example.myapplication.retrofit.PokemonAPI;
 import com.example.myapplication.retrofit.Retrofit2;
@@ -42,42 +41,16 @@ public class MainActivity extends AppCompatActivity {
 
         btn_ingresar.setOnClickListener(v -> {
 
-            // Prueba fail, por que al parecer el converter afecta a como se consumira el ws
-            /*Retrofit2 retrofit2 = new Retrofit2();
-
-            retrofit2.getService().wsNoticias(new Callback<String>() {
-                @Override
-                public void success(String s, Response response) {
-                    if (response.getStatus()==200){
-
-                        JSONArray data = null;
-                        try {
-                            data = new JSONArray(s);
-                            Log.i("Esta es la información", data.toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }else{
-                        Toast.makeText(getApplicationContext(), "Ocurrió un problema con el servidor", Toast.LENGTH_LONG).show();
-
-                    }
-                }
-
-                @Override
-                public void failure(RetrofitError error) {
-
-                }
-            });*/
             //------------------------- RETROFIT 2 -----------------------------------
             /*Retrofit2 retrofit2 = new Retrofit2();
 
-            Call<JsonObject> call = retrofit2.getService().getPokemonById("ditto");
+            Call<List<JsonObject>> call = retrofit2.getService().getPokemonById("ditto");
 
-            call.enqueue(new Callback<JsonObject>() {
+            call.enqueue(new Callback<List<JsonObject>>() {
                 @Override
-                public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                     if(response.isSuccessful()){
-                        JsonObject pokemon = response.body();
+                        List<JsonObject> pokemon = response.body();
                         JsonArray habilidades = pokemon.getAsJsonArray("abilities");
                         Log.i("pokemon", habilidades.toString());
                     } else {
@@ -86,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<JsonObject> call, Throwable t) {
+                public void onFailure(Call<List<JsonObject>> call, Throwable t) {
 
                 }
             });*/
@@ -99,19 +72,8 @@ public class MainActivity extends AppCompatActivity {
             apiRest.getService().wsNoticias(new Callback<String>() {
                 @Override
                 public void success(String s, Response response) {
-                    if (response.getStatus()==200){
 
-                        try {
-                            JSONArray data = new JSONArray(s);
-                            data.optJSONObject(0).optString("detail");
-                            Log.i("detalle", data.optJSONObject(0).optString("detail"));
-                            Log.i("Esta es la información", data.toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }else {
-                        Toast.makeText(getApplicationContext(), "Ocurrió un problema con el servidor", Toast.LENGTH_LONG).show();
-                    }
+
                 }
 
                 @Override
@@ -119,15 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
-
-            //---------------------- Login xd -----------------------------
-            /*if (editPassword.getText().toString().equals("12") && editUser.getText().toString().equals("daniel")){
-                abrirPantallaAdmin();
-            }else if(editPassword.getText().toString().equals("123") && editUser.getText().toString().equals("josue")){
-                abrirPantallaUsuario();
-            }else{
-                Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_LONG).show();
-            }*/
 
         });
 
