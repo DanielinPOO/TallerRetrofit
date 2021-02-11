@@ -1,6 +1,4 @@
 package com.example.myapplication.retrofit;
-
-import com.example.myapplication.models.PokemonByIdResponse;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;

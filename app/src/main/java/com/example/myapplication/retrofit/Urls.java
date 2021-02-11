@@ -1,24 +1,28 @@
 package com.example.myapplication.retrofit;
 
-import retrofit.Callback;
-import retrofit.http.GET;
-import retrofit.http.Path;
+
+import com.example.myapplication.pojo.ResultNews;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.http.GET;
 
 public interface Urls {
 
-
-    @GET("/api/information")
-    void wsEmergencias(Callback<String> cb);
-
-    /*@GET("/api/news/{uno}")
-    void wsNoticias(@Path("uno") String uno, Callback<String> cb);*/
     @GET("/api/news")
-    void wsNoticias(Callback<String> cb);
+    Call<List<JsonObject>> wsNoticias();
+
+    /*@GET("/api/information")
+    Call<JSONArray> wsEmergencias();
 
     @GET("/api/covid")
-    void wsCovid(Callback<String> cb);
+    Call<JSONArray> wsCovid();
 
     @GET("/api/centres")
-    void wsCentros(Callback<String> cb);
+    Call<JSONArray> wsCentros();*/
 
 }
