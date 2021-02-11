@@ -14,14 +14,6 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="n">
         <activity
-            android:name=".Usuario"
-            android:label="Solicitar Viático">
-        </activity>
-        <activity
-            android:name=".Admin"
-            android:label="Autorizar Viáticos">
-        </activity>
-        <activity
             android:name=".MainActivity"
             android:label="LOGIN">
 

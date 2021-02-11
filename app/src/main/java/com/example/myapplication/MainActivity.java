@@ -2,29 +2,20 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myapplication.models.PokemonByIdResponse;
 import com.example.myapplication.retrofit.ApiRest;
-import com.example.myapplication.retrofit.PokemonAPI;
-import com.example.myapplication.retrofit.Retrofit2;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import retrofit2.Call;
-import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         editPassword = findViewById(R.id.edit_password);
         editUser = findViewById(R.id.edit_user);
 
-        Usuario.jsonArrayRubros = new JSONArray();
 
         btn_ingresar.setOnClickListener(v -> {
 
@@ -130,19 +120,6 @@ public class MainActivity extends AppCompatActivity {
             }*/
 
         });
-
-    }
-
-    private void abrirPantallaAdmin() {
-
-        Intent i = new Intent(MainActivity.this, Admin.class);
-        startActivity(i);
-
-    }
-    private void abrirPantallaUsuario() {
-
-        Intent i = new Intent(MainActivity.this, Usuario.class);
-        startActivity(i);
 
     }
 }
