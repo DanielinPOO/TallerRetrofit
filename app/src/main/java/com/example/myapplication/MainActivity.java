@@ -24,18 +24,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        EditText editUser, editPassword;
-        TextView btn_ingresar;
+        EditText editUser;
+        TextView btn_ingresar, mostrar;
         btn_ingresar = findViewById(R.id.btn_ingresar);
-        editPassword = findViewById(R.id.edit_password);
         editUser = findViewById(R.id.edit_user);
-
+        mostrar = findViewById(R.id.mostrar);
 
         btn_ingresar.setOnClickListener(v -> {
 
             ApiRest apiRest =  new ApiRest();
 
-            apiRest.getService().wsGetPokemon("ditto",new Callback<String>() {
+            apiRest.getService().wsGetPokemon(editUser.getText().toString(),new Callback<String>() {
                 @Override
                 public void success(String s, Response response) {
                     if (response.getStatus()==200){
@@ -44,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
                             //Recuerden que la data puede venir dentro de un jsonArray o un jsonObject de primeras.
                             //JSONArray data = new JSONArray(s);
                             JSONObject data = new JSONObject(s);
+                            String imprimirInfo =
+                                    "Habilidad: " + data.optJSONArray("abilities").optJSONObject(1).getJSONObject("ability").optString("name")
+                                    +"\nBase experiencia: " +  data.optString("base_experience");
+                            mostrar.setText(imprimirInfo);
                             Log.i("detalle", data.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
