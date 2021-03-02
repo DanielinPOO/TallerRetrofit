@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
             ApiRest apiRest =  new ApiRest();
 
-            apiRest.getService().wsGetPokemon(editUser.getText().toString(),new Callback<String>() {
+            apiRest.getService().wsGetPokemon(editUser.getText().toString().toLowerCase(),new Callback<String>() {
                 @Override
                 public void success(String s, Response response) {
                     if (response.getStatus()==200){
