@@ -17,7 +17,8 @@
         android:layout_height="wrap_content"
         tools:ignore="UselessParent">
         <TextView
-            android:text="Usuario"
+            android:id="@+id/mostrar"
+            android:text="Pokemon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <EditText
@@ -26,23 +27,6 @@
             android:layout_height="40dp"
             android:hint="@string/hintUser"
             android:autofillHints="" />
-    </LinearLayout>
-    <LinearLayout
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="UselessParent">
-        <TextView
-            android:text="Contraseña"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <EditText
-            android:id="@+id/edit_password"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:inputType="textPassword"
-            android:hint="@string/hintPassword" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

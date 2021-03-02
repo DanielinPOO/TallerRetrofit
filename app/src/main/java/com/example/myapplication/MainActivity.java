@@ -11,6 +11,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -24,40 +25,43 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        EditText editUser, editPassword;
-        TextView btn_ingresar;
+        EditText editUser;
+        TextView btn_ingresar, mostrar;
         btn_ingresar = findViewById(R.id.btn_ingresar);
-        editPassword = findViewById(R.id.edit_password);
         editUser = findViewById(R.id.edit_user);
-
+        mostrar = findViewById(R.id.mostrar);
 
         btn_ingresar.setOnClickListener(v -> {
 
             //------------------------- RETROFIT 2 -----------------------------------
             Retrofit2 retrofit2 = new Retrofit2();
 
-            Call<List<JsonObject>> call = retrofit2.getService().wsNoticias();
+            Call<JsonObject> call = retrofit2.getService().getPokemonById(editUser.getText().toString().toLowerCase());
 
-            call.enqueue(new Callback<List<JsonObject>>() {
+            call.enqueue(new Callback<JsonObject>() {
                 @Override
-                public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                     if(response.isSuccessful()){
 
-                        List<JsonObject> data = response.body();
-                        Log.i("información", data.toString());
+                        //Recuerden que la data puede venir dentro de un jsonArray o un jsonObject de primeras.
+                        //JSONArray data = new JSONArray(s);
+                        JsonObject data;
+                        data = response.body();
 
-
-                        // TODO: para obtener datos apiPokemon
-                        /*JsonObject pokemon = response.body();
-                        JsonArray habilidades = pokemon.getAsJsonArray("abilities");
-                        Log.i("pokemon", habilidades.toString());*/
+                        //utilizar esto para obtener cualquier dato del JsonObject
+                        assert data != null;
+                        String imprimirInfo =
+                                "Habilidad: " + data.getAsJsonArray("abilities").get(1).getAsJsonObject().getAsJsonObject("ability").get("name")
+                                        +"\nBase experiencia: " +  data.get("base_experience");
+                        mostrar.setText(imprimirInfo);
+                        Log.i("detalle", data.toString());
                     } else {
                         Log.e("error", "Hubo un error inesperado!");
                     }
                 }
 
                 @Override
-                public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                public void onFailure(Call<JsonObject> call, Throwable t) {
 
                     Log.e("error", t.toString());
                 }

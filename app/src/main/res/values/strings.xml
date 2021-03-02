@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string name="hintUser">Ingrese usuario</string>
+    <string name="hintUser">Ingrese Pokemon</string>
     <string name="hintPassword">Ingrese contraseña</string>
 </resources>

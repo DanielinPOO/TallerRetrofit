@@ -4,18 +4,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Retrofit2 {
 
-    final private Urls urls;
+    final private PokemonAPI urls;
 
     public Retrofit2(){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Utils.URL_BASE2)
+                .baseUrl(Utils.URL_BASE)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        urls= retrofit.create(Urls.class);
+        urls= retrofit.create(PokemonAPI.class);
     }
 
 
-    public Urls getService() {
+    public PokemonAPI getService() {
         return  urls;
     }
 }

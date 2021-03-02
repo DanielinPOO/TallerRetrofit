@@ -1,7 +1,5 @@
 package com.example.myapplication.retrofit;
 
-
-import com.example.myapplication.pojo.ResultNews;
 import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
