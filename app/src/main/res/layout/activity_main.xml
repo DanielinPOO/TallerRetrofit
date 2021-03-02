@@ -18,7 +18,7 @@
         tools:ignore="UselessParent">
         <TextView
             android:id="@+id/mostrar"
-            android:text="Usuario"
+            android:text="Pokemon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <EditText
